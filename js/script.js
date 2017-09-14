@@ -1,22 +1,23 @@
 var button = document.getElementById("button");
 var question = document.getElementById("question");
-randomLetter="";
+var randomLetter="";
 var textToSpeak="";
+var welcomeMessage = "Welcome to Alphabet Finder";
 var audio = document.querySelector("audio");
+//text to speech
 var synth = window.speechSynthesis;
 
 
 button.addEventListener('click', function(event) {
   var intro = document.getElementById("intro");
   var filter = document.getElementById("filter");
-  //var question = document.getElementById("question");
 
   intro.style.display="none";
   filter.style.display="block";
-  audio.currentTime=4;
+  //audio.currentTime=6;
   question.style.display="block";
-  audio.play();
-  setTimeout(function() {loadQuestion();}, 5000)
+  welcomeMsg();
+  setTimeout(function() {loadQuestion();}, 3000)
 });
 
 function loadQuestion() {
@@ -27,7 +28,12 @@ function loadQuestion() {
   speak();
 }
 
-function speak(){
+function welcomeMsg(){
+  var utterThis = new SpeechSynthesisUtterance(welcomeMessage);
+  synth.speak(utterThis);
+}
+
+function speak(a){
   var utterThis = new SpeechSynthesisUtterance(textToSpeak);
   synth.speak(utterThis);
 }
@@ -38,6 +44,7 @@ function clickText(obj) {
     audio.currentTime=6;
     question.style.backgroundColor="green";
     question.style.color="white";
+    speak(textToSpeak);
     audio.play();
     setTimeout(function() {loadQuestion();}, 3000)
     //setInterval(function() {}, 30000);
