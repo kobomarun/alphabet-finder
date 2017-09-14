@@ -1,12 +1,16 @@
+.wrapper {
+  background-position: center;
+  background-size: cover;
+}
+
 .main {
   width: 100%;
-  background: #f8f8fa;
 }
 
 .header {
   text-align: center;
   font-family: fantasy;
-  background: #1f6569;
+  background: #679098;
   color: #fff;
   height: 80px;
   font-size: 60px;
@@ -15,7 +19,7 @@
 .intro-box {
   background: #fff;
   width: 100%;
-  border: 1px solid #1f6569;
+  border: 1px solid #679098;
   padding: 10px;
   margin-top: 200px;
   font-family: fantasy;
@@ -27,6 +31,7 @@
 
 .question-box {
   background: #fff;
+  color: #f00;
   width: 100%;
   border: 1px solid #1f6569;
   padding: 10px;
@@ -58,13 +63,12 @@
   margin-bottom: 5px;
   width: 60px;
   height: 60px;
-  background: #F4F8FC;
+  background: #679098;
   text-align: center;
   font-size: 25px;
   font-family: sans-serif;
   font-weight: bold;
-  border: 1px solid #DAE8FC;
-  color: #1F6569;
+  color: #f9f7f6;
   cursor: pointer;
   line-height: 60px;
 }
@@ -76,4 +80,12 @@ small {
   color: #fff;
   left: 140px;
   font-family: sans-serif;
+}
+
+/* Mobile CSS */
+@media (min-width: 768px) and (max-width: 1240px) {
+  .filter {
+    width: 500px;
+    margin: 0 auto;
+  }
 }
