@@ -1,5 +1,3 @@
-var button = document.getElementById("button");
-var question = document.getElementById("question");
 var randomLetter="";
 var textToSpeak="";
 var welcomeMessage = "Welcome to Alphabet Finder";
@@ -7,18 +5,39 @@ var audio = document.querySelector("audio");
 //text to speech
 var synth = window.speechSynthesis;
 
+var alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V'
+, 'W', 'X', 'Y', 'Z'];
+
+function welcomeMsg(){
+  var utterThis = new SpeechSynthesisUtterance(welcomeMessage);
+  synth.speak(utterThis);
+}
+
 
 button.addEventListener('click', function(event) {
-  var intro = document.getElementById("intro");
-  var filter = document.getElementById("filter");
 
   intro.style.display="none";
   filter.style.display="block";
+  loadAlphabets();
   //audio.currentTime=6;
   question.style.display="block";
   welcomeMsg();
   setTimeout(function() {loadQuestion();}, 3000)
 });
+
+function loadAlphabets() {
+
+  alphabets.filter(function(row) {
+    var li = document.createElement("li");
+    li.setAttribute('id', row);
+    li.setAttribute('onclick', "clickText(this.id)");
+    node = document.createTextNode(row);
+    boxed.appendChild(li);
+    li.appendChild(node);
+
+  });
+}
 
 function loadQuestion() {
   randomLetter = ('abcdefghijklmnopqrstuvwxyz').split('')[(Math.floor(Math.random() * 26 ))];
@@ -28,26 +47,46 @@ function loadQuestion() {
   speak();
 }
 
-function welcomeMsg(){
-  var utterThis = new SpeechSynthesisUtterance(welcomeMessage);
-  synth.speak(utterThis);
-}
-
 function speak(a){
   var utterThis = new SpeechSynthesisUtterance(textToSpeak);
   synth.speak(utterThis);
 }
 
+var i = 1;
+
 function clickText(obj) {
   if(randomLetter.toUpperCase()==obj) {
-    textToSpeak = "Great Job.";
-    audio.currentTime=6;
-    question.style.backgroundColor="green";
-    question.style.color="white";
-    speak(textToSpeak);
-    audio.play();
-    setTimeout(function() {loadQuestion();}, 3000)
-    //setInterval(function() {}, 30000);
+    var count = i++;
+    var myScore = score.innerHTML= " " +  count;
+    if(count == 4) {
+      audio.play();
+      question.innerHTML="Level 1 Completed";
+      congratulatoryMessages = "Congratulations. Level 1 completed";
+      //speak(congratulatoryMessages);
+      intro.style.display="block";
+      filter.style.display="none";
+      button.textContent = "Play Level 2";
+
+      } else if(count == 7) {
+      audio.play();
+      question.innerHTML="Level 2 Completed";
+      congratulatoryMessages = "Congratulations. Level 2 completed";
+      //speak(congratulatoryMessages);
+      intro.style.display="block";
+      filter.style.display="none";
+      button.textContent = "Play Level 3";
+      
+    }
+    else {
+      textToSpeak = "Great Job.";
+      audio.currentTime=6;
+      question.style.backgroundColor="green";
+      question.style.color="white";
+
+      speak(textToSpeak);
+      audio.play();
+      setTimeout(function() {loadQuestion();}, 3000);
+    }
 
   } else {
     textToSpeak = "Wrong Answer, Try Again";
