@@ -15,7 +15,7 @@
         <div class="header">
           Alphabet
         </div>
-        <small>Finder</small>
+        <small>Finders</small>
         <div class="container">
           <div class="main">
             <div class="col-sm-12">
@@ -42,5 +42,16 @@
 
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
+  <script type="text/javascript">
+  var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+recognition.lang = 'en-US';
+recognition.interimResults = false;
+recognition.maxAlternatives = 5;
+recognition.start();
+
+recognition.onresult = function(event) {
+  console.log('You said: ', event.results[0][0].transcript);
+};
+  </script>
   </body>
 </html>
